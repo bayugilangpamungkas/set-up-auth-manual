@@ -112,9 +112,7 @@
             <div class="p-8 bg-white/50 dark:bg-gray-800/50">
                 <form action="/login" method="POST" class="space-y-6">
                     @csrf
-                    @error('email')
-                        <small class="text-red-500 text-danger">{{ $message }}</small>
-                    @enderror
+
                     <!-- Email Input -->
                     <div class="mb-6 has-validation">
                         <label for="email"
@@ -126,25 +124,44 @@
                             </div>
                             <input type="email" name="email"
                                 class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-gray-700/50 border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-                                placeholder="your@email.com">
+                                placeholder="your@gmail.com">
                         </div>
+                        @error('email')
+                            <p id="email-error" class="error-message">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Password Input -->
-                    <div class="mb-6 has-validation">
-                        @error('password')
-                            <small class="text-red-500 text-danger">{{ $message }}</small>
-                        @enderror
-                        <label for="password"
-                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                    <div class="mb-6">
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Password
+                        </label>
+
                         <div class="relative">
+                            <!-- Password Icon -->
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-lock text-gray-400"></i>
                             </div>
-                            <input type="password" name="password"
-                                class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-gray-700/50 border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-                                placeholder="••••••••">
+
+                            <!-- Password Input Field -->
+                            <input type="password" id="password" name="password"
+                                class="w-full pl-10 pr-12 py-3 bg-white/50 dark:bg-gray-700/50 border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                                placeholder="Password" aria-describedby="password-error">
+
+                            <!-- Toggle Password Visibility Button -->
+                            <button type="button"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500 focus:outline-none"
+                                onclick="togglePasswordVisibility('password')" aria-label="Toggle password visibility">
+                                <i class="fas fa-eye" id="password-eye"></i>
+                            </button>
                         </div>
+
+                        <!-- Error Message -->
+                        @error('password')
+                            <p id="password-error" class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </p>
+                        @enderror
                     </div>
 
                     <!-- Remember Me & Forgot Password -->
@@ -181,7 +198,7 @@
 
                     <!-- Social Login Buttons -->
                     <div class="grid grid-cols-2 gap-4">
-                        <a href="#"
+                        <a href="/auth-google-redirect"
                             class="flex items-center justify-center py-2.5 px-4 bg-gray-100 dark:bg-gray-700 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
                             <i class="fab fa-google text-red-500 mr-2"></i>
                             <span class="text-sm font-medium">Google</span>
@@ -198,7 +215,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                         Don't have an account?
-                        <a href="#"
+                        <a href="/register"
                             class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors">Sign
                             up</a>
                     </p>
@@ -231,6 +248,20 @@
         // Check for saved dark mode preference
         if (localStorage.getItem('darkMode') === 'true') {
             document.documentElement.classList.add('dark');
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            const eyeIcon = document.getElementById(`${fieldId}-eye`);
+
+            if (field.type === 'password') {
+                field.type = 'text';
+                eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                field.type = 'password';
+                eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
         }
     </script>
 </body>

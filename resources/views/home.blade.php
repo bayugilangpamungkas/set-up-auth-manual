@@ -148,8 +148,8 @@
         style="animation-delay: -4s;"></div>
 
     <!-- Header Navigation -->
-    <header class="fixed  z-50 top-0 w-full py-4 px-6 lg:px-8 transition-all duration-300 bg-white shadow-lg"
-        id="header ">
+    <header class="fixed z-50 top-0 w-full py-4 px-6 lg:px-8 transition-all duration-300 bg-white shadow-lg"
+        id="header">
         <nav class="max-w-7xl mx-auto flex items-center justify-between">
             <!-- Logo -->
             <div class="flex items-center space-x-3">
@@ -165,24 +165,31 @@
                 </div>
             </div>
 
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden focus:outline-none"
+                onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#home"
-                    class="nav-link text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-all">Home</a>
+                    class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-all">Home</a>
                 <a href="#products"
-                    class="nav-link text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-all">Products</a>
+                    class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-all">Products</a>
                 <a href="#categories"
-                    class="nav-link text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-all">Categories</a>
+                    class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-all">Categories</a>
                 <a href="#about"
-                    class="nav-link text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-all">About</a>
+                    class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-all">About</a>
                 <a href="#contact"
-                    class="nav-link text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-all">Contact</a>
+                    class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-all">Contact</a>
             </div>
 
             <!-- Right Section -->
-            <div class="flex items-center space-x-4">
-                <!-- Search -->
-                <div class="hidden md:flex relative">
+            <div class="hidden md:flex items-center space-x-4">
+                <div class="relative">
                     <input type="text" placeholder="Search products..."
                         class="w-64 px-4 py-2 bg-white/20 dark:bg-gray-800/30 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
                     <svg class="absolute right-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
@@ -192,7 +199,6 @@
                     </svg>
                 </div>
 
-                <!-- Dark Mode Toggle -->
                 <button onclick="toggleDark()"
                     class="p-2.5 rounded-xl hover:bg-white/20 dark:hover:bg-gray-700/30 transition-all">
                     <svg class="w-5 h-5 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
@@ -200,24 +206,11 @@
                     </svg>
                     <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
-                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
                             clip-rule="evenodd" />
                     </svg>
                 </button>
 
-                {{-- <!-- Cart Keranjang-->
-                <button class="relative p-2.5 rounded-xl hover:bg-white/20 dark:hover:bg-gray-700/30 transition-all"
-                    onclick="toggleCart()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4m-2.4 0L3 3H1m6 10v6a1 1 0 001 1h10a1 1 0 001-1v-6m-5 3v-3" />
-                    </svg>
-                    <span
-                        class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center cart-badge"
-                        id="cart-count">0</span>
-                </button> --}}
-
-                <!-- Account -->
                 <a href="/login"
                     class="px-6 py-2.5 gradient-primary text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">
                     Sign in
@@ -228,7 +221,25 @@
                 </a>
             </div>
         </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden px-6 pt-4 pb-6 hidden space-y-4 bg-white shadow-inner">
+            <a href="#home" class="block text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+            <a href="#products" class="block text-gray-700 hover:text-indigo-600 font-medium">Products</a>
+            <a href="#categories" class="block text-gray-700 hover:text-indigo-600 font-medium">Categories</a>
+            <a href="#about" class="block text-gray-700 hover:text-indigo-600 font-medium">About</a>
+            <a href="#contact" class="block text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
+            <div class="flex flex-col gap-3">
+                <a href="/login"
+                    class="w-full text-center px-4 py-2 gradient-primary text-white rounded-xl font-semibold">Sign
+                    in</a>
+                <a href="/register"
+                    class="w-full text-center px-4 py-2 gradient-primary text-white rounded-xl font-semibold">Sign
+                    up</a>
+            </div>
+        </div>
     </header>
+
 
     <!-- Hero Section -->
     <section id="home" class="relative z-10 pt-20 pb-32 px-6 lg:px-8">
@@ -284,21 +295,14 @@
                 <!-- Right Content - Hero Image -->
                 <div class="relative animate-fade-in-up" style="animation-delay: 0.2s;">
                     <div class="relative w-full h-96 lg:h-[500px] rounded-3xl overflow-hidden glass-effect">
+                        <!-- Background Image -->
+                        <img src="https://plus.unsplash.com/premium_photo-1700824490100-f82146b2441f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA4fHxzaG9wcGluZ3xlbnwwfHwwfHx8MA%3D%3D"
+                            alt="Premium Products" class="w-full h-full object-cover object-center">
+                        <!-- Gradient Overlay -->
                         <div class="absolute inset-0 gradient-primary opacity-20"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center text-white">
-                                <div
-                                    class="w-32 h-32 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center">
-                                    <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <h3 class="text-2xl font-bold mb-2">Premium Quality</h3>
-                                <p class="text-white/80">Carefully selected products</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -752,8 +756,8 @@
                         <div class="absolute top-4 right-4 price-tag px-3 py-1 text-white text-sm font-semibold rounded-full">
                             $${product.price.toFixed(2)}
                         </div>
-                    </div>
-                    <div class="p-6">
+                    </div>0
+                    <div class="p-6 h-64>
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="font-semibold text-lg">${product.name}</h3>
                             <div class="flex items-center">
@@ -764,7 +768,7 @@
                             </div>
                         </div>
                         <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${product.description}</p>
-                        <button onclick="addToCart(${product.id})" class="w-full py-2.5 gradient-primary text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg">
+                        <button href='' onclick="addToCart(${product.id})" class="w-full py-2.5 gradient-primary text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg">
                             Add to Cart
                         </button>
                     </div>

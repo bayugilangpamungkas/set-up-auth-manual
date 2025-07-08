@@ -109,19 +109,24 @@
 
             <!-- Form -->
             <div class="p-8 bg-white/50 dark:bg-gray-800/50">
-                <form>
+                <form action="/register" method="post">
+                    @csrf
                     <!-- Full Name Input -->
                     <div class="mb-4">
-                        <label for="fullname"
+                        <label for="name"
                             class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-user text-gray-400"></i>
                             </div>
-                            <input type="text" id="fullname"
+                            <input type="text" name="name" id="name" required minlength="3"
+                                value="{{ old('name') }}"
                                 class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-gray-700/50 border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-                                placeholder="John Doe">
+                                placeholder="Name">
                         </div>
+                        @error('name')
+                            <p id='name-error' class="error-mesagge">{{ $mesagge }}</p>
+                        @enderror
                     </div>
 
                     <!-- Email Input -->
@@ -133,10 +138,13 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-envelope text-gray-400"></i>
                             </div>
-                            <input type="email" id="email"
+                            <input type="email" name="email" value="{{ old('email') }}"
                                 class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-gray-700/50 border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-                                placeholder="your@email.com">
+                                placeholder="Email">
                         </div>
+                        @error('email')
+                            <p id="email-error" class="error-mesagge">{{ $mesagge }}</p>
+                        @enderror
                     </div>
 
                     <!-- Password Input -->
@@ -147,9 +155,9 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-lock text-gray-400"></i>
                             </div>
-                            <input type="password" id="password"
+                            <input type="password" name="password" id="password" required minlength="8"
                                 class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-gray-700/50 border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-                                placeholder="••••••••" oninput="checkPasswordStrength()">
+                                placeholder="Password" oninput="checkPasswordStrength()">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                 <button type="button" class="text-gray-400 hover:text-gray-500"
                                     onclick="togglePasswordVisibility('password')">
@@ -167,9 +175,16 @@
                             <div id="strength-4" class="password-strength w-full bg-gray-200 dark:bg-gray-700 rounded">
                             </div>
                         </div>
+                        <p id="password-strength-text" class="text-xs mt-1 text-gray-500 dark:text-gray-400">
+                            Password strength indicator
+                        </p>
+                        @error('password')
+                            <p id="password-error" class="error-message">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Confirm Password Input -->
+                    @csrf
                     <div class="mb-6">
                         <label for="confirm-password"
                             class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirm
@@ -178,9 +193,9 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-lock text-gray-400"></i>
                             </div>
-                            <input type="password" id="confirm-password"
+                            <input type="password" id="confirm-password" name="confirm-password"
                                 class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-gray-700/50 border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-                                placeholder="••••••••">
+                                placeholder="Confirmation Password">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                 <button type="button" class="text-gray-400 hover:text-gray-500"
                                     onclick="togglePasswordVisibility('confirm-password')">
@@ -188,6 +203,9 @@
                                 </button>
                             </div>
                         </div>
+                        @error('confirm-password')
+                            <p id="confirm-password-error" class="error-message">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Terms Checkbox -->
@@ -237,7 +255,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                         Already have an account?
-                        <a href="#"
+                        <a href="/login"
                             class="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors">Sign
                             in</a>
                     </p>
